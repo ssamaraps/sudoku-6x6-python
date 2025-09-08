@@ -26,9 +26,4 @@ No meu caso, implementei a lógica do **Sudoku 6x6**, onde o jogador deve preenc
    ```bash
    git clone https://github.com/ssamaraps/sudoku-6x6-python.git
 
-   # Sudoku 6x6
-
-Aqui está o manual completo do projeto:
-
-[Baixar Manual do Sudoku 6x6](/Manual_Sudoku_6x6.docx)
 
