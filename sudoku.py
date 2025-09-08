@@ -13,53 +13,45 @@ import random
 
 
 #Função que valida se a linha, coluna e numero que o usuário escolheu é válido para a matriz
+
+
 def validar_jogada(matriz):
-
-    #Cria um loop infinito que irá rodar para que se o jogador erre le possa tentar de novo
     while True:
-        linha_escolhida = int(input('Escolha uma linha de 0 a 5: '))
-        coluna_escolhida = int(input('Escolha uma coluna de 0 a 5: '))
-        #Coloca a linha e coluna escolhida em uma variável
-        if matriz[linha_escolhida][coluna_escolhida] != 0:
-            print('A célula já está preenchida, escolha outra.')
-            continue 
-        #verifica se a célula está preenchida, se estiver o CONTINUE vplta para o início do loop e ignora o resto do código
-        numero_jogada = int(input('Escreva um número de 1 a 6 para preencher: '))
-        #se estiver vazio pede um num e armazena
-        while True:
-            #loop que verifica o numero digitado
-            if numero_jogada in matriz[linha_escolhida]:
-                #verifica se o valor está dentro (IN) da linha
-                print('O número já está presente na linha') 
-                numero_jogada = int(input('Escreva um número de 1 a 6 para preencher: '))
-                continue
-                #volta para o início da validação
-                
-            coluna = [linha[coluna_escolhida] for linha in matriz]
-            # percorre as linhas na matriz e permaanece na coluna escolhida e reserva a coluna em uma variável
-            if numero_jogada in coluna:
-                print('O número já está presente na coluna')
-                numero_jogada = int(input('Escreva um número de 1 a 6 para preencher: '))
-                continue
-            #verifica se o num está na coluna
+        try:
+            linha = int(input('Escolha uma linha de 0 a 5: '))
+            coluna = int(input('Escolha uma coluna de 0 a 5: '))
+        except ValueError:
+            print('Digite números inteiros para linha e coluna.')
+            continue
 
-            if 6 < numero_jogada or numero_jogada < 1:
-                print('O número que você digitou não está entre 1 e 6')
-                numero_jogada = int(input('Escreva um número de 1 a 6 para preencher: '))
-                continue
+        if not (0 <= linha < 6 and 0 <= coluna < 6):
+            print('Linha ou coluna fora do intervalo (0 a 5). Tente novamente.')
+            continue
 
-            if not encontra_bloco(linha_escolhida, coluna_escolhida, matriz, numero_jogada):
-                print('O número já está presente no bloco 2x3.')
-                numero_jogada = int(input('Escreva um número de 1 a 6 para preencher: '))
-                continue
-                #Se for False o número já está no bloco
+        if matriz[linha][coluna] != 0:
+            print('A célula escolhida já está preenchida. Escolha outra.')
+            continue
 
-            matriz[linha_escolhida][coluna_escolhida] = numero_jogada
-            print('Jogada válida!')
-            break
-        #Se tiver tudo certo adiciona na posição escolhida o num escolhido
+        try:
+            numero = int(input('Escreva um número de 1 a 6 para preencher: '))
+        except ValueError:
+            print('Digite um número inteiro entre 1 e 6.')
+            continue
 
-        break  
+        if not (1 <= numero <= 6):
+            print('O número deve estar entre 1 e 6.')
+            continue
+
+        if not valido(matriz, linha, coluna, numero):
+            print('Jogada inválida: número já existe na linha, coluna ou bloco.')
+            continue
+
+        # tudo certo -> insere e sai
+        matriz[linha][coluna] = numero
+        print('Jogada válida!')
+        return True  # ou return matriz se preferir retornar a matriz
+
+ 
 
 def encontra_bloco(linha_escolhida,coluna_escolhida, matriz, numero_jogada):
     if linha_escolhida < 2:
@@ -140,8 +132,7 @@ def preencher_matriz(matriz):
     return True     
 
 
-for linha in matriz:
-    print(linha)
+
 
 def gerar_espacos(matriz):
     contador = 0
