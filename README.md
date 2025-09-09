@@ -25,3 +25,5 @@ No meu caso, implementei a lógica do **Sudoku 6x6**, onde o jogador deve preenc
 1. Clone este repositório:
    ```bash
    git clone https://github.com/ssamaraps/sudoku-6x6-python.git
+
+
