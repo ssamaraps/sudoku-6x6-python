@@ -177,13 +177,7 @@ gerar_espacos(matriz)
 import pygame
 import random
 
-# =========================================
-# Use seu código de lógica do Sudoku aqui
-# =========================================
-# matriz, valido(), verificar_vitoria(), preencher_matriz(), gerar_espacos()
-# Supondo que você já tenha:
-# preencher_matriz(matriz)
-# gerar_espacos(matriz)
+
 
 # Para teste rápido, exemplo mínimo:
 matriz = [[0]*6 for _ in range(6)]
